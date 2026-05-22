@@ -352,12 +352,17 @@ function doLogout() {
 // ── API CALL ──────────────────────────────────────────────
 function apiCall(params, callback) {
   params.password = authToken;
-  var url = GAS_URL;
+  
+  // Use GET with URL params to avoid CORS preflight issues
+  var queryString = Object.keys(params).map(function(k){
+    return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
+  }).join('&');
+  
+  var url = GAS_URL + '?' + queryString;
 
   fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(params)
+    method: 'GET',
+    redirect: 'follow'
   })
   .then(function(r){ return r.json(); })
   .then(function(data){
