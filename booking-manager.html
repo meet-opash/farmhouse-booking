@@ -73,7 +73,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 
 .main-content{padding:20px;max-width:720px;margin:0 auto;}
 
-/* ── FARM SELECT ── */
+/* ── SECTION CARD ── */
 .section-card{
   background:var(--white);border:1px solid var(--border);border-radius:var(--radius);
   padding:22px;margin-bottom:20px;
@@ -112,7 +112,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .chip-remove-btn:hover{color:var(--red);}
 .no-dates{font-size:13px;color:var(--muted);font-style:italic;}
 
-/* ── CALENDAR PICKER ── */
+/* ── CALENDAR ── */
 .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
 .cal-nav-btn{
   width:34px;height:34px;border-radius:50%;border:1.5px solid var(--border);
@@ -132,35 +132,47 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .cal-day:hover:not(.past):not(.empty){background:var(--green-lite);color:var(--green-dark);}
 .cal-day.past{color:#D1D5DB;cursor:not-allowed;}
 .cal-day.empty{cursor:default;}
-.cal-day.already-booked{
-  background:#F3F4F6;color:#9CA3AF;cursor:not-allowed;
-}
+.cal-day.already-booked{background:#F3F4F6;color:#9CA3AF;cursor:not-allowed;}
 .cal-day.already-booked::after{
   content:'';position:absolute;width:4px;height:4px;border-radius:50%;
   background:#9CA3AF;bottom:3px;left:50%;transform:translateX(-50%);
 }
-.cal-day.to-add{
-  background:var(--green);color:#fff;border-color:var(--green);
-}
+.cal-day.to-add{background:var(--green);color:#fff;border-color:var(--green);}
 .cal-day.to-add::after{
   content:'';position:absolute;width:4px;height:4px;border-radius:50%;
   background:rgba(255,255,255,0.7);bottom:3px;left:50%;transform:translateX(-50%);
 }
-.cal-day.to-remove{
-  background:var(--red-lite);color:var(--red);border-color:var(--red);text-decoration:line-through;
-}
+.cal-day.to-remove{background:var(--red-lite);color:var(--red);border-color:var(--red);text-decoration:line-through;}
 
-/* ── LEGEND ── */
 .cal-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:12px;font-weight:700;color:var(--muted);}
 .legend-dot{width:12px;height:12px;border-radius:4px;display:inline-block;margin-right:4px;vertical-align:middle;}
+
+/* ── BOOKING DETAILS FORM ── */
+.booking-details-form{
+  margin-top:18px;padding-top:16px;border-top:1px solid var(--border);
+  display:none;
+}
+.form-row{margin-bottom:14px;}
+.form-label{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;display:block;}
+.form-input{
+  width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;
+  font-size:14px;font-family:var(--font);outline:none;transition:border-color .2s;
+  background:var(--white);
+}
+.form-input:focus{border-color:var(--green);}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+.email-note{
+  background:var(--green-lite);border:1px solid var(--green);border-radius:10px;
+  padding:10px 14px;font-size:12px;font-weight:700;color:var(--green-dark);
+  display:flex;align-items:center;gap:8px;margin-bottom:14px;
+}
+.email-note svg{width:16px;height:16px;stroke:var(--green-dark);fill:none;flex-shrink:0;}
 
 /* ── PENDING CHANGES ── */
 .pending-wrap{display:none;margin-top:18px;padding-top:16px;border-top:1px solid var(--border);}
 .pending-title{font-size:14px;font-weight:800;margin-bottom:10px;}
 .pending-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:13px;}
-.pending-badge{
-  padding:3px 10px;border-radius:20px;font-size:12px;font-weight:800;
-}
+.pending-badge{padding:3px 10px;border-radius:20px;font-size:12px;font-weight:800;}
 .badge-add{background:var(--green-lite);color:var(--green-dark);}
 .badge-remove{background:var(--red-lite);color:var(--red);}
 .pending-dates{font-weight:700;color:var(--text);}
@@ -205,11 +217,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 }
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ── RESPONSIVE ── */
 @media(max-width:480px){
   .main-content{padding:12px;}
   .section-card{padding:16px;}
   .action-row{flex-direction:column;}
+  .form-row-2{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -232,7 +244,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 <!-- ── MAIN APP ── -->
 <div id="app">
 
-  <!-- Top bar -->
   <div class="top-bar">
     <div class="top-bar-left">
       <div class="top-bar-logo">
@@ -254,15 +265,13 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <div id="farm-selector-wrap">
         <div class="loader"><div class="spinner"></div>Loading farms from Website...</div>
       </div>
-
-      <!-- Current booked dates -->
       <div class="booked-dates-wrap" id="booked-dates-wrap">
         <div class="booked-label">Currently Booked Dates</div>
         <div class="booked-chips" id="booked-chips"></div>
       </div>
     </div>
 
-    <!-- Calendar -->
+    <!-- Calendar + Booking Details + Actions -->
     <div class="section-card" id="cal-card" style="display:none;">
       <div class="section-title">Select Dates to Add / Remove</div>
 
@@ -271,7 +280,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <span class="cal-month-label" id="cal-month-label"></span>
         <button class="cal-nav-btn" onclick="calNav(1)">&#8250;</button>
       </div>
-
       <div class="cal-dow-row" id="cal-dow"></div>
       <div class="cal-grid" id="cal-grid"></div>
 
@@ -281,7 +289,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <span><span class="legend-dot" style="background:var(--red-lite);border:1px solid var(--red);"></span>Will be removed</span>
       </div>
 
-      <!-- Pending changes summary -->
+      <!-- Pending changes -->
       <div class="pending-wrap" id="pending-wrap">
         <div class="pending-title">Pending Changes</div>
         <div id="pending-add-row" class="pending-row" style="display:none;">
@@ -294,43 +302,85 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         </div>
       </div>
 
+      <!-- ── BOOKING DETAILS FORM (shows when dates are selected) ── -->
+      <div class="booking-details-form" id="booking-details-form">
+        <div class="section-title" style="margin-bottom:14px;">Customer Booking Details</div>
+        <div class="email-note">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+          Dates save hone ke baad customer ko automatic confirmation email jayega
+        </div>
+
+        <div class="form-row">
+          <label class="form-label">Customer Name *</label>
+          <input class="form-input" type="text" id="cust-name" placeholder="e.g. Rahul Sharma">
+        </div>
+
+        <div class="form-row">
+          <label class="form-label">Customer Email *</label>
+          <input class="form-input" type="email" id="cust-email" placeholder="e.g. rahul@gmail.com">
+        </div>
+
+        <div class="form-row-2">
+          <div>
+            <label class="form-label">Check-in Date &amp; Time</label>
+            <input class="form-input" type="text" id="cust-checkin" placeholder="e.g. Jun 20 at 6:00 PM">
+          </div>
+          <div>
+            <label class="form-label">Check-out Date &amp; Time</label>
+            <input class="form-input" type="text" id="cust-checkout" placeholder="e.g. Jun 21 at 5:00 AM">
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div>
+            <label class="form-label">No. of Guests</label>
+            <input class="form-input" type="number" id="cust-guests" placeholder="e.g. 10" min="1">
+          </div>
+          <div>
+            <label class="form-label">Total Amount (₹)</label>
+            <input class="form-input" type="number" id="cust-amount" placeholder="e.g. 15000" min="0">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label">Special Notes (optional)</label>
+          <input class="form-input" type="text" id="cust-notes" placeholder="e.g. Anniversary trip, needs decoration">
+        </div>
+      </div>
+
       <!-- Action buttons -->
       <div class="action-row">
         <button class="btn-reset" onclick="resetChanges()">Reset</button>
         <button class="btn-save" id="save-btn" onclick="saveChanges()" disabled>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
-          Save to Website
+          Save &amp; Send Confirmation
         </button>
       </div>
     </div>
 
-  </div><!-- /main-content -->
-</div><!-- /app -->
+  </div>
+</div>
 
-<!-- Toast -->
 <div class="toast" id="toast"></div>
 
 <script>
 // ── CONFIGURATION ────────────────────────────────────────
-// Paste your deployed Google Apps Script URL here:
-var GAS_URL = "https://script.google.com/macros/s/AKfycbxpJPZTctRwp6h-cNJB0-w3ea_aAN_B-HfZbO_1zO3GqqM3TvaapvivBQgzOH0_-aAC/exec";
-var APP_PASSWORD = "Opash@21#"; // Must match MANAGER_PASSWORD in Code.gs
+var GAS_URL      = "https://script.google.com/macros/s/AKfycbxpJPZTctRwp6h-cNJB0-w3ea_aAN_B-HfZbO_1zO3GqqM3TvaapvivBQgzOH0_-aAC/exec";
+var APP_PASSWORD = "Opash@21#";
 // ────────────────────────────────────────────────────────
 
-var authToken   = null;
-var products    = [];
+var authToken       = null;
+var products        = [];
 var selectedProduct = null;
-var currentDates = [];
+var currentDates    = [];
 var toAdd    = [];
 var toRemove = [];
-
 var calYear, calMonth;
 var today = new Date(); today.setHours(0,0,0,0);
-
 var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 var DOWS   = ['Mo','Tu','We','Th','Fr','Sa','Su'];
 
-// ── LOGIN ─────────────────────────────────────────────────
+// ── LOGIN ──────────────────────────────────────────────
 document.getElementById('pwd-input').addEventListener('keydown', function(e){
   if(e.key === 'Enter') doLogin();
 });
@@ -343,45 +393,33 @@ function doLogin() {
   document.getElementById('app').style.display = 'block';
   loadFarms();
 }
+function doLogout() { authToken = null; location.reload(); }
 
-function doLogout() {
-  authToken = null;
-  location.reload();
-}
-
-// ── API CALL ──────────────────────────────────────────────
+// ── API CALL ──────────────────────────────────────────
 function apiCall(params, callback) {
   params.password = authToken;
-  
-  // Use GET with URL params to avoid CORS preflight issues
-  var queryString = Object.keys(params).map(function(k){
-    return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
+  var qs = Object.keys(params).map(function(k){
+    return encodeURIComponent(k) + '=' + encodeURIComponent(params[k] || '');
   }).join('&');
-  
-  var url = GAS_URL + '?' + queryString;
-
-  fetch(url, {
-    method: 'GET',
-    redirect: 'follow'
-  })
-  .then(function(r){ return r.json(); })
-  .then(function(data){
-    if (!data.success && data.error === 'Invalid password') {
-      showToast('Session expired. Please login again.', 'error');
-      setTimeout(function(){ doLogout(); }, 2000);
-      return;
-    }
-    callback(null, data);
-  })
-  .catch(function(err){ callback(err, null); });
+  fetch(GAS_URL + '?' + qs, { method: 'GET', redirect: 'follow' })
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if (!data.success && data.error === 'Invalid password') {
+        showToast('Session expired. Please login again.', 'error');
+        setTimeout(doLogout, 2000);
+        return;
+      }
+      callback(null, data);
+    })
+    .catch(function(err){ callback(err, null); });
 }
 
-// ── LOAD FARMS ────────────────────────────────────────────
+// ── LOAD FARMS ────────────────────────────────────────
 function loadFarms() {
   apiCall({ action: 'get_products' }, function(err, data) {
     if (err || !data.success) {
       document.getElementById('farm-selector-wrap').innerHTML =
-        '<p style="color:var(--red);font-size:13px;font-weight:700;">⚠️ Could not load farms. Check your GAS URL and Shopify token.<br><small>' + (err || data.error) + '</small></p>';
+        '<p style="color:var(--red);font-size:13px;">⚠️ Could not load farms. Check GAS URL.<br><small>' + (err||data.error) + '</small></p>';
       return;
     }
     products = data.products;
@@ -393,7 +431,7 @@ function loadFarms() {
 function renderFarmSelect() {
   var html = '<select class="farm-select" id="farm-select" onchange="onFarmChange(this.value)">';
   html += '<option value="">— Select a Farmhouse —</option>';
-  products.forEach(function(p) {
+  products.forEach(function(p){
     html += '<option value="' + p.id + '">' + escHtml(p.title) + '</option>';
   });
   html += '</select>';
@@ -411,27 +449,19 @@ function onFarmChange(productId) {
   loadBookedDates(productId);
 }
 
-// ── LOAD BOOKED DATES ─────────────────────────────────────
 function loadBookedDates(productId) {
   document.getElementById('booked-dates-wrap').style.display = 'none';
   document.getElementById('cal-card').style.display = 'none';
-
   var wrap = document.getElementById('booked-dates-wrap');
   wrap.style.display = 'block';
-  document.getElementById('booked-chips').innerHTML = '<div class="loader"><div class="spinner"></div>Loading dates...</div>';
+  document.getElementById('booked-chips').innerHTML = '<div class="loader"><div class="spinner"></div>Loading...</div>';
 
   apiCall({ action: 'get_booked_dates', product_id: productId }, function(err, data) {
-    if (err || !data.success) {
-      showToast('Could not load dates: ' + (err || data.error), 'error');
-      return;
-    }
+    if (err || !data.success) { showToast('Could not load dates', 'error'); return; }
     currentDates = data.dates || [];
     renderBookedChips();
-
-    // Init calendar
     var now = new Date();
-    calYear  = now.getFullYear();
-    calMonth = now.getMonth();
+    calYear = now.getFullYear(); calMonth = now.getMonth();
     document.getElementById('cal-card').style.display = 'block';
     renderCalendar();
   });
@@ -439,20 +469,17 @@ function loadBookedDates(productId) {
 
 function renderBookedChips() {
   var chips = document.getElementById('booked-chips');
-  if (currentDates.length === 0) {
-    chips.innerHTML = '<span class="no-dates">No dates booked yet</span>';
-    return;
-  }
-  chips.innerHTML = currentDates.map(function(d) {
-    var markedRemove = toRemove.indexOf(d) !== -1;
-    return '<span class="booked-chip' + (markedRemove ? ' marked-remove' : '') + '">'
+  if (!currentDates.length) { chips.innerHTML = '<span class="no-dates">No dates booked yet</span>'; return; }
+  chips.innerHTML = currentDates.map(function(d){
+    var mr = toRemove.indexOf(d) !== -1;
+    return '<span class="booked-chip' + (mr?' marked-remove':'') + '">'
       + fmtDate(d)
-      + '<button class="chip-remove-btn" onclick="toggleRemoveDate(\'' + d + '\')" title="Remove this date">×</button>'
+      + '<button class="chip-remove-btn" onclick="toggleRemoveDate(\'' + d + '\')" title="Remove">×</button>'
       + '</span>';
   }).join('');
 }
 
-// ── CALENDAR ──────────────────────────────────────────────
+// ── CALENDAR ──────────────────────────────────────────
 function calNav(delta) {
   calMonth += delta;
   if (calMonth < 0) { calMonth = 11; calYear--; }
@@ -462,124 +489,93 @@ function calNav(delta) {
 
 function renderCalendar() {
   document.getElementById('cal-month-label').textContent = MONTHS[calMonth] + ' ' + calYear;
-
-  // DOW headers
   var dow = document.getElementById('cal-dow');
   dow.innerHTML = DOWS.map(function(d){ return '<div class="cal-dow">' + d + '</div>'; }).join('');
-
   var grid = document.getElementById('cal-grid');
   grid.innerHTML = '';
-
-  var firstDay  = new Date(calYear, calMonth, 1);
-  var startDow  = (firstDay.getDay() + 6) % 7;
-  var daysInMo  = new Date(calYear, calMonth + 1, 0).getDate();
-
+  var firstDay = new Date(calYear, calMonth, 1);
+  var startDow = (firstDay.getDay() + 6) % 7;
+  var daysInMo = new Date(calYear, calMonth + 1, 0).getDate();
   for (var e = 0; e < startDow; e++) {
-    var emp = document.createElement('div');
-    emp.className = 'cal-day empty';
-    grid.appendChild(emp);
+    var emp = document.createElement('div'); emp.className = 'cal-day empty'; grid.appendChild(emp);
   }
-
   for (var day = 1; day <= daysInMo; day++) {
-    var d    = new Date(calYear, calMonth, day);
-    var iso  = isoDate(d);
+    var d = new Date(calYear, calMonth, day);
+    var iso = isoDate(d);
     var isPast = d < today;
-
     var cls = 'cal-day';
-    if (isPast) {
-      cls += ' past';
-    } else if (toAdd.indexOf(iso) !== -1) {
-      cls += ' to-add';
-    } else if (toRemove.indexOf(iso) !== -1) {
-      cls += ' to-remove';
-    } else if (currentDates.indexOf(iso) !== -1) {
-      cls += ' already-booked';
-    }
-
+    if (isPast) cls += ' past';
+    else if (toAdd.indexOf(iso) !== -1) cls += ' to-add';
+    else if (toRemove.indexOf(iso) !== -1) cls += ' to-remove';
+    else if (currentDates.indexOf(iso) !== -1) cls += ' already-booked';
     var el = document.createElement('div');
-    el.className = cls;
-    el.textContent = day;
-    if (!isPast) {
-      (function(isoVal){ el.addEventListener('click', function(){ onCalDayClick(isoVal); }); })(iso);
-    }
+    el.className = cls; el.textContent = day;
+    if (!isPast) { (function(v){ el.addEventListener('click', function(){ onCalDayClick(v); }); })(iso); }
     grid.appendChild(el);
   }
-
   updatePendingUI();
 }
 
 function onCalDayClick(iso) {
   var inCurrent = currentDates.indexOf(iso) !== -1;
-  var inAdd     = toAdd.indexOf(iso) !== -1;
-  var inRemove  = toRemove.indexOf(iso) !== -1;
-
+  var inAdd = toAdd.indexOf(iso) !== -1;
+  var inRemove = toRemove.indexOf(iso) !== -1;
   if (inCurrent) {
-    // Toggle remove
-    if (inRemove) {
-      toRemove.splice(toRemove.indexOf(iso), 1);
-    } else {
-      toRemove.push(iso);
-    }
+    if (inRemove) toRemove.splice(toRemove.indexOf(iso), 1);
+    else toRemove.push(iso);
   } else {
-    // Toggle add
-    if (inAdd) {
-      toAdd.splice(toAdd.indexOf(iso), 1);
-    } else {
-      toAdd.push(iso);
-    }
+    if (inAdd) toAdd.splice(toAdd.indexOf(iso), 1);
+    else toAdd.push(iso);
   }
-
-  renderCalendar();
-  renderBookedChips();
+  renderCalendar(); renderBookedChips();
 }
 
 function toggleRemoveDate(iso) {
   var idx = toRemove.indexOf(iso);
-  if (idx !== -1) {
-    toRemove.splice(idx, 1);
-  } else {
-    toRemove.push(iso);
-  }
-  renderCalendar();
-  renderBookedChips();
+  if (idx !== -1) toRemove.splice(idx, 1); else toRemove.push(iso);
+  renderCalendar(); renderBookedChips();
 }
 
 function updatePendingUI() {
-  var pendingWrap = document.getElementById('pending-wrap');
-  var saveBtn     = document.getElementById('save-btn');
-  var hasChanges  = toAdd.length > 0 || toRemove.length > 0;
+  var hasChanges = toAdd.length > 0 || toRemove.length > 0;
+  document.getElementById('pending-wrap').style.display = hasChanges ? 'block' : 'none';
+  document.getElementById('booking-details-form').style.display = hasChanges ? 'block' : 'none';
+  document.getElementById('save-btn').disabled = !hasChanges;
 
-  pendingWrap.style.display = hasChanges ? 'block' : 'none';
-  saveBtn.disabled = !hasChanges;
-
-  var addRow    = document.getElementById('pending-add-row');
+  var addRow = document.getElementById('pending-add-row');
   var removeRow = document.getElementById('pending-remove-row');
-
-  if (toAdd.length > 0) {
-    addRow.style.display = 'flex';
-    document.getElementById('pending-add-dates').textContent = toAdd.map(fmtDate).join(', ');
-  } else {
-    addRow.style.display = 'none';
-  }
-
-  if (toRemove.length > 0) {
-    removeRow.style.display = 'flex';
-    document.getElementById('pending-remove-dates').textContent = toRemove.map(fmtDate).join(', ');
-  } else {
-    removeRow.style.display = 'none';
-  }
+  if (toAdd.length > 0) { addRow.style.display = 'flex'; document.getElementById('pending-add-dates').textContent = toAdd.map(fmtDate).join(', '); }
+  else addRow.style.display = 'none';
+  if (toRemove.length > 0) { removeRow.style.display = 'flex'; document.getElementById('pending-remove-dates').textContent = toRemove.map(fmtDate).join(', '); }
+  else removeRow.style.display = 'none';
 }
 
 function resetChanges() {
   toAdd = []; toRemove = [];
-  renderCalendar();
-  renderBookedChips();
+  ['cust-name','cust-email','cust-checkin','cust-checkout','cust-guests','cust-amount','cust-notes']
+    .forEach(function(id){ document.getElementById(id).value = ''; });
+  renderCalendar(); renderBookedChips();
 }
 
-// ── SAVE ─────────────────────────────────────────────────
+// ── SAVE + SEND EMAIL ─────────────────────────────────
 function saveChanges() {
   if (!selectedProduct) return;
   if (toAdd.length === 0 && toRemove.length === 0) return;
+
+  // Validate required fields if adding dates (i.e., a new booking confirmation)
+  var custName  = document.getElementById('cust-name').value.trim();
+  var custEmail = document.getElementById('cust-email').value.trim();
+
+  if (toAdd.length > 0) {
+    if (!custName) { showToast('Please enter customer name', 'error'); document.getElementById('cust-name').focus(); return; }
+    if (!custEmail || !custEmail.includes('@')) { showToast('Please enter a valid customer email', 'error'); document.getElementById('cust-email').focus(); return; }
+  }
+
+  var custCheckin  = document.getElementById('cust-checkin').value.trim();
+  var custCheckout = document.getElementById('cust-checkout').value.trim();
+  var custGuests   = document.getElementById('cust-guests').value.trim();
+  var custAmount   = document.getElementById('cust-amount').value.trim();
+  var custNotes    = document.getElementById('cust-notes').value.trim();
 
   var btn = document.getElementById('save-btn');
   btn.disabled = true;
@@ -589,50 +585,50 @@ function saveChanges() {
     action:          'update_dates',
     product_id:      selectedProduct.id,
     dates_to_add:    toAdd.join(','),
-    dates_to_remove: toRemove.join(',')
+    dates_to_remove: toRemove.join(','),
+    // Email fields
+    send_email:      toAdd.length > 0 && custEmail ? 'true' : 'false',
+    cust_name:       custName,
+    cust_email:      custEmail,
+    cust_checkin:    custCheckin  || (toAdd.length > 0 ? toAdd.map(fmtDate).join(', ') : ''),
+    cust_checkout:   custCheckout,
+    cust_guests:     custGuests,
+    cust_amount:     custAmount ? ('₹' + parseInt(custAmount).toLocaleString('en-IN')) : '',
+    cust_notes:      custNotes,
+    farm_name:       selectedProduct.title
   }, function(err, data) {
-    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg> Save to Website';
-
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg> Save &amp; Send Confirmation';
     if (err || !data.success) {
       showToast('Error: ' + (err || data.error), 'error');
       btn.disabled = false;
       return;
     }
-
-    // Update local state
     currentDates = data.dates || [];
     toAdd = []; toRemove = [];
-
-    renderCalendar();
-    renderBookedChips();
-
-    showToast('✓ Dates updated successfully on Website!', 'success');
+    ['cust-name','cust-email','cust-checkin','cust-checkout','cust-guests','cust-amount','cust-notes']
+      .forEach(function(id){ document.getElementById(id).value = ''; });
+    renderCalendar(); renderBookedChips();
+    var msg = data.email_sent ? '✓ Dates saved & confirmation email sent!' : '✓ Dates saved! (Email skipped — no email provided)';
+    showToast(msg, 'success');
   });
 }
 
-// ── HELPERS ──────────────────────────────────────────────
+// ── HELPERS ──────────────────────────────────────────
 function isoDate(d) {
-  return d.getFullYear() + '-'
-    + String(d.getMonth() + 1).padStart(2, '0') + '-'
-    + String(d.getDate()).padStart(2, '0');
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
 }
-
 function fmtDate(iso) {
   var p = iso.split('-');
-  var d = new Date(parseInt(p[0]), parseInt(p[1]) - 1, parseInt(p[2]));
-  return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()]
-    + ' ' + d.getDate() + ', ' + d.getFullYear();
+  var d = new Date(parseInt(p[0]), parseInt(p[1])-1, parseInt(p[2]));
+  return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
 }
-
-function escHtml(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
+function escHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 var toastTimer = null;
 function showToast(msg, type) {
   var t = document.getElementById('toast');
   t.textContent = msg;
-  t.className = 'toast show ' + (type || '');
+  t.className = 'toast show ' + (type||'');
   if (toastTimer) clearTimeout(toastTimer);
   toastTimer = setTimeout(function(){ t.className = 'toast'; }, 3500);
 }
