@@ -547,7 +547,10 @@ function toggleRemoveDate(iso) {
 function updatePendingUI() {
   var hasChanges = toAdd.length > 0 || toRemove.length > 0;
   document.getElementById('pending-wrap').style.display = hasChanges ? 'block' : 'none';
-  document.getElementById('booking-details-form').style.display = hasChanges ? 'block' : 'none';
+  
+  // Booking details form sirf tab dikhao jab dates ADD ho rahi hon
+  document.getElementById('booking-details-form').style.display = toAdd.length > 0 ? 'block' : 'none';
+  
   document.getElementById('save-btn').disabled = !hasChanges;
 
   var addRow = document.getElementById('pending-add-row');
