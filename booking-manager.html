@@ -589,22 +589,29 @@ function saveChanges() {
   btn.disabled = true;
   btn.innerHTML = '<div class="spinner" style="border-top-color:#fff;"></div> Saving...';
 
-  apiCall({
-    action:          'update_dates',
-    product_id:      selectedProduct.id,
-    dates_to_add:    toAdd.join(','),
-    dates_to_remove: toRemove.join(','),
-    // Email fields
-    send_email:      toAdd.length > 0 && custEmail ? 'true' : 'false',
-    cust_name:       custName,
-    cust_email:      custEmail,
-    cust_checkin:    custCheckin  || (toAdd.length > 0 ? toAdd.map(fmtDate).join(', ') : ''),
-    cust_checkout:   custCheckout,
-    cust_guests:     custGuests,
-    cust_amount:     custAmount ? ('₹' + parseInt(custAmount).toLocaleString('en-IN')) : '',
-    cust_notes:      custNotes,
-    farm_name:       selectedProduct.title
-  }, function(err, data) {
+  // Auto calculate checkin/checkout from selected dates + times
+var sortedDates = toAdd.slice().sort();
+var firstDate = sortedDates.length > 0 ? fmtDate(sortedDates[0]) : '';
+var lastDate  = sortedDates.length > 0 ? fmtDate(sortedDates[sortedDates.length - 1]) : '';
+
+var ciText = firstDate && custCheckin  ? firstDate + ' at ' + custCheckin  : firstDate || custCheckin  || '';
+var coText = lastDate  && custCheckout ? lastDate  + ' at ' + custCheckout : lastDate  || custCheckout || '';
+
+apiCall({
+  action:          'update_dates',
+  product_id:      selectedProduct.id,
+  dates_to_add:    toAdd.join(','),
+  dates_to_remove: toRemove.join(','),
+  send_email:      toAdd.length > 0 && custEmail ? 'true' : 'false',
+  cust_name:       custName,
+  cust_email:      custEmail,
+  cust_checkin:    ciText,
+  cust_checkout:   coText,
+  cust_guests:     custGuests,
+  cust_amount:     custAmount ? ('₹' + parseInt(custAmount).toLocaleString('en-IN')) : '',
+  cust_notes:      custNotes,
+  farm_name:       selectedProduct.title
+}, function(err, data) {
     btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg> Save &amp; Send Confirmation';
     if (err || !data.success) {
       showToast('Error: ' + (err || data.error), 'error');
