@@ -11,84 +11,146 @@
 :root{
   --green:#1D9E75;--green-dark:#166B52;--green-lite:#E6F7F2;
   --amber:#F5A623;--red:#E74C3C;--red-lite:#FDEDED;
-  --blue:#3B82F6;--blue-lite:#EFF6FF;
   --text:#1A1A1A;--muted:#6B7280;--border:#E5E7EB;
   --bg:#F7F8FA;--white:#fff;--radius:14px;
   --shadow:0 2px 20px rgba(0,0,0,0.08);
   --font:'Nunito','Segoe UI',sans-serif;
 }
 
-body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;padding:0;}
 
 /* ── LOGIN ── */
-#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
-.login-card{background:var(--white);border-radius:var(--radius);padding:40px 32px;width:100%;max-width:380px;box-shadow:var(--shadow);text-align:center;}
-.login-logo{width:64px;height:64px;border-radius:16px;background:var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;}
+#login-screen{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;
+}
+.login-card{
+  background:var(--white);border-radius:var(--radius);padding:40px 32px;
+  width:100%;max-width:380px;box-shadow:var(--shadow);text-align:center;
+}
+.login-logo{
+  width:64px;height:64px;border-radius:16px;background:var(--green);
+  display:flex;align-items:center;justify-content:center;margin:0 auto 20px;
+}
 .login-logo svg{width:34px;height:34px;stroke:#fff;fill:none;stroke-width:2;}
 .login-card h1{font-size:22px;font-weight:900;margin-bottom:4px;}
 .login-card p{font-size:14px;color:var(--muted);margin-bottom:28px;}
-.login-input{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:10px;font-size:16px;font-family:var(--font);outline:none;transition:border-color .2s;margin-bottom:14px;}
+.login-input{
+  width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:10px;
+  font-size:16px;font-family:var(--font);outline:none;transition:border-color .2s;
+  margin-bottom:14px;
+}
 .login-input:focus{border-color:var(--green);}
-.btn-green{width:100%;padding:14px;background:var(--green);color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:800;cursor:pointer;transition:background .2s;font-family:var(--font);}
+.btn-green{
+  width:100%;padding:14px;background:var(--green);color:#fff;border:none;
+  border-radius:10px;font-size:16px;font-weight:800;cursor:pointer;
+  transition:background .2s;font-family:var(--font);
+}
 .btn-green:hover{background:var(--green-dark);}
 .login-error{color:var(--red);font-size:13px;margin-top:10px;display:none;}
 
 /* ── MAIN APP ── */
 #app{display:none;min-height:100vh;}
 
-.top-bar{background:var(--white);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.top-bar{
+  background:var(--white);border-bottom:1px solid var(--border);
+  padding:14px 20px;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;
+}
 .top-bar-left{display:flex;align-items:center;gap:12px;}
-.top-bar-logo{width:36px;height:36px;border-radius:10px;background:var(--green);display:flex;align-items:center;justify-content:center;}
+.top-bar-logo{
+  width:36px;height:36px;border-radius:10px;background:var(--green);
+  display:flex;align-items:center;justify-content:center;
+}
 .top-bar-logo svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.2;}
 .top-bar h2{font-size:17px;font-weight:900;}
 .top-bar small{font-size:12px;color:var(--muted);display:block;font-weight:600;}
-.btn-logout{padding:8px 16px;border:1.5px solid var(--border);border-radius:8px;background:var(--white);font-size:13px;font-weight:700;cursor:pointer;color:var(--muted);font-family:var(--font);transition:all .2s;}
+.btn-logout{
+  padding:8px 16px;border:1.5px solid var(--border);border-radius:8px;
+  background:var(--white);font-size:13px;font-weight:700;cursor:pointer;
+  color:var(--muted);font-family:var(--font);transition:all .2s;
+}
 .btn-logout:hover{border-color:var(--red);color:var(--red);}
 
-/* ── TABS ── */
-.tabs{display:flex;gap:4px;padding:16px 20px 0;background:var(--white);border-bottom:1px solid var(--border);}
-.tab-btn{padding:10px 20px;border:none;background:none;font-family:var(--font);font-size:14px;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;}
-.tab-btn.active{color:var(--green);border-bottom-color:var(--green);}
-.tab-btn .badge{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:var(--red);color:#fff;font-size:10px;font-weight:900;margin-left:6px;}
-
-.main-content{padding:20px;max-width:760px;margin:0 auto;}
-.tab-panel{display:none;}
-.tab-panel.active{display:block;}
-
-/* ── CARDS ── */
-.section-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:20px;}
-.section-title{font-size:15px;font-weight:800;color:var(--text);border-left:4px solid var(--green);padding-left:10px;margin-bottom:16px;}
+.main-content{padding:20px;max-width:720px;margin:0 auto;}
 
 /* ── FARM SELECT ── */
-.farm-select{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-family:var(--font);font-weight:700;outline:none;background:var(--white);cursor:pointer;transition:border-color .2s;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px;}
+.section-card{
+  background:var(--white);border:1px solid var(--border);border-radius:var(--radius);
+  padding:22px;margin-bottom:20px;
+}
+.section-title{
+  font-size:15px;font-weight:800;color:var(--text);
+  border-left:4px solid var(--green);padding-left:10px;margin-bottom:16px;
+}
+.farm-select{
+  width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:10px;
+  font-size:15px;font-family:var(--font);font-weight:700;outline:none;
+  background:var(--white);cursor:pointer;transition:border-color .2s;
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:40px;
+}
 .farm-select:focus{border-color:var(--green);}
 
-/* ── BOOKED DATES ── */
+/* ── CURRENT BOOKED DATES ── */
 .booked-dates-wrap{margin-top:16px;display:none;}
 .booked-label{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;}
 .booked-chips{display:flex;flex-wrap:wrap;gap:8px;}
-.booked-chip{display:flex;align-items:center;gap:6px;background:#F3F4F6;border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:13px;font-weight:700;color:var(--text);}
-.booked-chip.marked-remove{background:var(--red-lite);border-color:var(--red);color:var(--red);text-decoration:line-through;}
-.chip-remove-btn{width:18px;height:18px;border-radius:50%;border:none;background:none;cursor:pointer;font-size:15px;color:var(--muted);display:flex;align-items:center;justify-content:center;padding:0;line-height:1;transition:color .2s;}
+.booked-chip{
+  display:flex;align-items:center;gap:6px;
+  background:#F3F4F6;border:1px solid var(--border);border-radius:20px;
+  padding:5px 12px;font-size:13px;font-weight:700;color:var(--text);
+}
+.booked-chip.marked-remove{
+  background:var(--red-lite);border-color:var(--red);color:var(--red);text-decoration:line-through;
+}
+.chip-remove-btn{
+  width:18px;height:18px;border-radius:50%;border:none;background:none;
+  cursor:pointer;font-size:15px;color:var(--muted);display:flex;align-items:center;
+  justify-content:center;padding:0;line-height:1;transition:color .2s;
+}
 .chip-remove-btn:hover{color:var(--red);}
 .no-dates{font-size:13px;color:var(--muted);font-style:italic;}
 
-/* ── CALENDAR ── */
+/* ── CALENDAR PICKER ── */
 .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
-.cal-nav-btn{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--border);background:var(--white);cursor:pointer;font-size:18px;color:var(--text);display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.cal-nav-btn{
+  width:34px;height:34px;border-radius:50%;border:1.5px solid var(--border);
+  background:var(--white);cursor:pointer;font-size:18px;color:var(--text);
+  display:flex;align-items:center;justify-content:center;transition:all .2s;
+}
 .cal-nav-btn:hover{background:var(--green-lite);border-color:var(--green);color:var(--green);}
 .cal-month-label{font-size:16px;font-weight:800;}
 .cal-dow-row{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;margin-bottom:4px;}
 .cal-dow{font-size:11px;font-weight:700;color:var(--muted);padding:4px 0;}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
-.cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;position:relative;border:1.5px solid transparent;}
+.cal-day{
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;
+  transition:all .15s;position:relative;border:1.5px solid transparent;
+}
 .cal-day:hover:not(.past):not(.empty){background:var(--green-lite);color:var(--green-dark);}
 .cal-day.past{color:#D1D5DB;cursor:not-allowed;}
 .cal-day.empty{cursor:default;}
-.cal-day.already-booked{background:#F3F4F6;color:#9CA3AF;cursor:not-allowed;}
-.cal-day.already-booked::after{content:'';position:absolute;width:4px;height:4px;border-radius:50%;background:#9CA3AF;bottom:3px;left:50%;transform:translateX(-50%);}
-.cal-day.to-add{background:var(--green);color:#fff;border-color:var(--green);}
-.cal-day.to-remove{background:var(--red-lite);color:var(--red);border-color:var(--red);text-decoration:line-through;}
+.cal-day.already-booked{
+  background:#F3F4F6;color:#9CA3AF;cursor:not-allowed;
+}
+.cal-day.already-booked::after{
+  content:'';position:absolute;width:4px;height:4px;border-radius:50%;
+  background:#9CA3AF;bottom:3px;left:50%;transform:translateX(-50%);
+}
+.cal-day.to-add{
+  background:var(--green);color:#fff;border-color:var(--green);
+}
+.cal-day.to-add::after{
+  content:'';position:absolute;width:4px;height:4px;border-radius:50%;
+  background:rgba(255,255,255,0.7);bottom:3px;left:50%;transform:translateX(-50%);
+}
+.cal-day.to-remove{
+  background:var(--red-lite);color:var(--red);border-color:var(--red);text-decoration:line-through;
+}
+
+/* ── LEGEND ── */
 .cal-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:12px;font-weight:700;color:var(--muted);}
 .legend-dot{width:12px;height:12px;border-radius:4px;display:inline-block;margin-right:4px;vertical-align:middle;}
 
@@ -96,86 +158,81 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .pending-wrap{display:none;margin-top:18px;padding-top:16px;border-top:1px solid var(--border);}
 .pending-title{font-size:14px;font-weight:800;margin-bottom:10px;}
 .pending-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:13px;}
-.pending-badge{padding:3px 10px;border-radius:20px;font-size:12px;font-weight:800;}
+.pending-badge{
+  padding:3px 10px;border-radius:20px;font-size:12px;font-weight:800;
+}
 .badge-add{background:var(--green-lite);color:var(--green-dark);}
 .badge-remove{background:var(--red-lite);color:var(--red);}
 .pending-dates{font-weight:700;color:var(--text);}
+
+/* ── ACTION BUTTONS ── */
 .action-row{display:flex;gap:12px;margin-top:20px;}
-.btn-save{flex:1;padding:14px;background:var(--green);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:800;cursor:pointer;transition:background .2s;font-family:var(--font);display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-save{
+  flex:1;padding:14px;background:var(--green);color:#fff;border:none;
+  border-radius:10px;font-size:15px;font-weight:800;cursor:pointer;
+  transition:background .2s;font-family:var(--font);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
 .btn-save:hover:not(:disabled){background:var(--green-dark);}
 .btn-save:disabled{background:#D1D5DB;cursor:not-allowed;}
-.btn-reset{padding:14px 20px;border:1.5px solid var(--border);border-radius:10px;background:var(--white);font-size:15px;font-weight:700;cursor:pointer;color:var(--muted);font-family:var(--font);transition:all .2s;}
+.btn-reset{
+  padding:14px 20px;border:1.5px solid var(--border);border-radius:10px;
+  background:var(--white);font-size:15px;font-weight:700;cursor:pointer;
+  color:var(--muted);font-family:var(--font);transition:all .2s;
+}
 .btn-reset:hover{border-color:var(--red);color:var(--red);}
 
-/* ── REVIEW APPROVAL TABLE ── */
-.review-card{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px;}
-.review-card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;gap:12px;}
-.review-meta{font-size:12px;color:var(--muted);font-weight:700;}
-.review-stars{color:#F5A623;font-size:16px;letter-spacing:1px;}
-.review-text{font-size:14px;color:#374151;line-height:1.6;margin-bottom:12px;}
-.review-farm{font-size:12px;font-weight:800;color:var(--green);margin-bottom:4px;}
-.review-actions{display:flex;gap:8px;}
-.btn-approve{padding:7px 16px;background:var(--green);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:800;cursor:pointer;font-family:var(--font);transition:background .2s;}
-.btn-approve:hover{background:var(--green-dark);}
-.btn-reject{padding:7px 16px;background:var(--white);color:var(--red);border:1.5px solid var(--red);border-radius:8px;font-size:13px;font-weight:800;cursor:pointer;font-family:var(--font);transition:all .2s;}
-.btn-reject:hover{background:var(--red-lite);}
-.status-badge{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:800;}
-.status-approved{background:var(--green-lite);color:var(--green-dark);}
-.status-pending{background:#FFF8F0;color:#92510E;}
-.status-rejected{background:var(--red-lite);color:var(--red);}
-
-/* ── BOOKINGS TABLE ── */
-.booking-row{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
-.booking-info{flex:1;min-width:0;}
-.booking-name{font-size:14px;font-weight:800;}
-.booking-detail{font-size:12px;color:var(--muted);font-weight:600;margin-top:2px;}
-.booking-price{font-size:15px;font-weight:900;color:var(--green);}
-.btn-send-review{padding:7px 14px;background:var(--blue-lite);color:var(--blue);border:1.5px solid var(--blue);border-radius:8px;font-size:12px;font-weight:800;cursor:pointer;font-family:var(--font);transition:all .2s;white-space:nowrap;}
-.btn-send-review:hover{background:var(--blue);color:#fff;}
-.btn-send-review:disabled{opacity:.5;cursor:not-allowed;}
-
-/* ── EMPTY STATE ── */
-.empty-state{text-align:center;padding:40px 20px;color:var(--muted);}
-.empty-state .emoji{font-size:40px;margin-bottom:12px;}
-.empty-state p{font-size:14px;font-weight:600;}
-
-/* ── TOAST / LOADER ── */
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#1A1A1A;color:#fff;padding:12px 24px;border-radius:30px;font-size:14px;font-weight:700;transition:transform .3s ease;z-index:999;display:flex;align-items:center;gap:8px;white-space:nowrap;}
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:#1A1A1A;color:#fff;padding:12px 24px;border-radius:30px;
+  font-size:14px;font-weight:700;transition:transform .3s ease;z-index:999;
+  display:flex;align-items:center;gap:8px;white-space:nowrap;
+}
 .toast.show{transform:translateX(-50%) translateY(0);}
 .toast.success{background:var(--green-dark);}
 .toast.error{background:var(--red);}
-.loader{display:flex;align-items:center;justify-content:center;gap:10px;padding:30px;font-size:14px;color:var(--muted);font-weight:700;}
-.spinner{width:22px;height:22px;border:2.5px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite;}
+
+/* ── LOADING ── */
+.loader{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:30px;font-size:14px;color:var(--muted);font-weight:700;
+}
+.spinner{
+  width:22px;height:22px;border:2.5px solid var(--border);
+  border-top-color:var(--green);border-radius:50%;
+  animation:spin .7s linear infinite;
+}
 @keyframes spin{to{transform:rotate(360deg)}}
 
+/* ── RESPONSIVE ── */
 @media(max-width:480px){
   .main-content{padding:12px;}
   .section-card{padding:16px;}
   .action-row{flex-direction:column;}
-  .tabs{gap:0;padding:12px 12px 0;}
-  .tab-btn{padding:8px 12px;font-size:13px;}
-  .booking-row{flex-direction:column;align-items:flex-start;}
 }
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
+<!-- ── LOGIN SCREEN ── -->
 <div id="login-screen">
   <div class="login-card">
     <div class="login-logo">
       <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
     </div>
     <h1>Booking Manager</h1>
-    <p>Farmhouse management portal</p>
-    <input class="login-input" type="password" id="pwd-input" placeholder="Password dalein" autocomplete="current-password">
+    <p>Farmhouse date management portal</p>
+    <input class="login-input" type="password" id="pwd-input" placeholder="Enter password" autocomplete="current-password">
     <button class="btn-green" onclick="doLogin()">Login</button>
-    <div class="login-error" id="login-error">Password galat hai.</div>
+    <div class="login-error" id="login-error">Incorrect password. Try again.</div>
   </div>
 </div>
 
-<!-- MAIN APP -->
+<!-- ── MAIN APP ── -->
 <div id="app">
+
+  <!-- Top bar -->
   <div class="top-bar">
     <div class="top-bar-left">
       <div class="top-bar-logo">
@@ -183,112 +240,100 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       </div>
       <div>
         <h2>Booking Manager</h2>
-        <small id="top-bar-subtitle">Loading...</small>
+        <small id="top-bar-subtitle">Loading farms...</small>
       </div>
     </div>
     <button class="btn-logout" onclick="doLogout()">Logout</button>
   </div>
 
-  <!-- TABS -->
-  <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('dates')">📅 Dates Block</button>
-    <button class="tab-btn" onclick="switchTab('reviews')">⭐ Reviews <span class="badge" id="pending-review-badge" style="display:none">0</span></button>
-    <button class="tab-btn" onclick="switchTab('bookings')">📋 Bookings</button>
-  </div>
-
   <div class="main-content">
 
-    <!-- TAB 1: DATE MANAGEMENT -->
-    <div class="tab-panel active" id="tab-dates">
-      <div class="section-card">
-        <div class="section-title">Farm Select Karein</div>
-        <div id="farm-selector-wrap">
-          <div class="loader"><div class="spinner"></div>Farms load ho rahe hain...</div>
-        </div>
-        <div class="booked-dates-wrap" id="booked-dates-wrap">
-          <div class="booked-label">Currently Booked Dates</div>
-          <div class="booked-chips" id="booked-chips"></div>
-        </div>
+    <!-- Farm selector -->
+    <div class="section-card">
+      <div class="section-title">Select Farmhouse</div>
+      <div id="farm-selector-wrap">
+        <div class="loader"><div class="spinner"></div>Loading farms from Website...</div>
       </div>
 
-      <div class="section-card" id="cal-card" style="display:none;">
-        <div class="section-title">Dates Add / Remove Karein</div>
-        <div class="cal-nav">
-          <button class="cal-nav-btn" onclick="calNav(-1)">&#8249;</button>
-          <span class="cal-month-label" id="cal-month-label"></span>
-          <button class="cal-nav-btn" onclick="calNav(1)">&#8250;</button>
-        </div>
-        <div class="cal-dow-row" id="cal-dow"></div>
-        <div class="cal-grid" id="cal-grid"></div>
-        <div class="cal-legend">
-          <span><span class="legend-dot" style="background:#F3F4F6;border:1px solid #D1D5DB;"></span>Already booked</span>
-          <span><span class="legend-dot" style="background:var(--green);"></span>Add hoga</span>
-          <span><span class="legend-dot" style="background:var(--red-lite);border:1px solid var(--red);"></span>Remove hoga</span>
-        </div>
-        <div class="pending-wrap" id="pending-wrap">
-          <div class="pending-title">Pending Changes</div>
-          <div id="pending-add-row" class="pending-row" style="display:none;">
-            <span class="pending-badge badge-add">+ Adding</span>
-            <span class="pending-dates" id="pending-add-dates"></span>
-          </div>
-          <div id="pending-remove-row" class="pending-row" style="display:none;">
-            <span class="pending-badge badge-remove">- Removing</span>
-            <span class="pending-dates" id="pending-remove-dates"></span>
-          </div>
-        </div>
-        <div class="action-row">
-          <button class="btn-reset" onclick="resetChanges()">Reset</button>
-          <button class="btn-save" id="save-btn" onclick="saveChanges()" disabled>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
-            Website pe Save Karein
-          </button>
-        </div>
+      <!-- Current booked dates -->
+      <div class="booked-dates-wrap" id="booked-dates-wrap">
+        <div class="booked-label">Currently Booked Dates</div>
+        <div class="booked-chips" id="booked-chips"></div>
       </div>
     </div>
 
-    <!-- TAB 2: REVIEW APPROVAL -->
-    <div class="tab-panel" id="tab-reviews">
-      <div class="section-card">
-        <div class="section-title">Review Approve / Reject Karein</div>
-        <div id="reviews-list">
-          <div class="loader"><div class="spinner"></div>Reviews load ho rahe hain...</div>
+    <!-- Calendar -->
+    <div class="section-card" id="cal-card" style="display:none;">
+      <div class="section-title">Select Dates to Add / Remove</div>
+
+      <div class="cal-nav">
+        <button class="cal-nav-btn" onclick="calNav(-1)">&#8249;</button>
+        <span class="cal-month-label" id="cal-month-label"></span>
+        <button class="cal-nav-btn" onclick="calNav(1)">&#8250;</button>
+      </div>
+
+      <div class="cal-dow-row" id="cal-dow"></div>
+      <div class="cal-grid" id="cal-grid"></div>
+
+      <div class="cal-legend">
+        <span><span class="legend-dot" style="background:#F3F4F6;border:1px solid #D1D5DB;"></span>Already booked</span>
+        <span><span class="legend-dot" style="background:var(--green);"></span>Will be added</span>
+        <span><span class="legend-dot" style="background:var(--red-lite);border:1px solid var(--red);"></span>Will be removed</span>
+      </div>
+
+      <!-- Pending changes summary -->
+      <div class="pending-wrap" id="pending-wrap">
+        <div class="pending-title">Pending Changes</div>
+        <div id="pending-add-row" class="pending-row" style="display:none;">
+          <span class="pending-badge badge-add">+ Adding</span>
+          <span class="pending-dates" id="pending-add-dates"></span>
         </div>
+        <div id="pending-remove-row" class="pending-row" style="display:none;">
+          <span class="pending-badge badge-remove">- Removing</span>
+          <span class="pending-dates" id="pending-remove-dates"></span>
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="action-row">
+        <button class="btn-reset" onclick="resetChanges()">Reset</button>
+        <button class="btn-save" id="save-btn" onclick="saveChanges()" disabled>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
+          Save to Website
+        </button>
       </div>
     </div>
 
-    <!-- TAB 3: BOOKINGS LOG -->
-    <div class="tab-panel" id="tab-bookings">
-      <div class="section-card">
-        <div class="section-title">Bookings Log</div>
-        <div id="bookings-list">
-          <div class="loader"><div class="spinner"></div>Bookings load ho rahe hain...</div>
-        </div>
-      </div>
-    </div>
+  </div><!-- /main-content -->
+</div><!-- /app -->
 
-  </div>
-</div>
-
+<!-- Toast -->
 <div class="toast" id="toast"></div>
 
 <script>
-// ── CONFIG ────────────────────────────────────────────────
-var GAS_URL      = "https://script.google.com/macros/s/AKfycbxpJPZTctRwp6h-cNJB0-w3ea_aAN_B-HfZbO_1zO3GqqM3TvaapvivBQgzOH0_-aAC/exec";
-var APP_PASSWORD = "Opash@21#";
-// ─────────────────────────────────────────────────────────
+// ── CONFIGURATION ────────────────────────────────────────
+// Paste your deployed Google Apps Script URL here:
+var GAS_URL = "https://script.google.com/macros/s/AKfycbxpJPZTctRwp6h-cNJB0-w3ea_aAN_B-HfZbO_1zO3GqqM3TvaapvivBQgzOH0_-aAC/exec";
+var APP_PASSWORD = "Opash@21#"; // Must match MANAGER_PASSWORD in Code.gs
+// ────────────────────────────────────────────────────────
 
-var authToken = null;
-var products = [];
+var authToken   = null;
+var products    = [];
 var selectedProduct = null;
 var currentDates = [];
-var toAdd = [], toRemove = [];
+var toAdd    = [];
+var toRemove = [];
+
 var calYear, calMonth;
 var today = new Date(); today.setHours(0,0,0,0);
+
 var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 var DOWS   = ['Mo','Tu','We','Th','Fr','Sa','Su'];
 
 // ── LOGIN ─────────────────────────────────────────────────
-document.getElementById('pwd-input').addEventListener('keydown', function(e){ if(e.key==='Enter') doLogin(); });
+document.getElementById('pwd-input').addEventListener('keydown', function(e){
+  if(e.key === 'Enter') doLogin();
+});
 
 function doLogin() {
   var pwd = document.getElementById('pwd-input').value.trim();
@@ -298,67 +343,95 @@ function doLogin() {
   document.getElementById('app').style.display = 'block';
   loadFarms();
 }
-function doLogout(){ authToken = null; location.reload(); }
 
-// ── TABS ─────────────────────────────────────────────────
-function switchTab(name) {
-  document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
-  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
-  document.getElementById('tab-' + name).classList.add('active');
-  event.currentTarget.classList.add('active');
-
-  if (name === 'reviews')  loadReviewsForApproval();
-  if (name === 'bookings') loadBookingsLog();
+function doLogout() {
+  authToken = null;
+  location.reload();
 }
 
-// ── API ───────────────────────────────────────────────────
+// ── API CALL ──────────────────────────────────────────────
 function apiCall(params, callback) {
   params.password = authToken;
-  var qs = Object.keys(params).map(function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]); }).join('&');
-  fetch(GAS_URL + '?' + qs, { method: 'GET', redirect: 'follow' })
-    .then(function(r){ return r.json(); })
-    .then(function(d){
-      if (!d.success && d.error === 'Invalid password') { showToast('Session expired. Login again.', 'error'); setTimeout(doLogout, 2000); return; }
-      callback(null, d);
-    })
-    .catch(function(err){ callback(err, null); });
+  
+  // Use GET with URL params to avoid CORS preflight issues
+  var queryString = Object.keys(params).map(function(k){
+    return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
+  }).join('&');
+  
+  var url = GAS_URL + '?' + queryString;
+
+  fetch(url, {
+    method: 'GET',
+    redirect: 'follow'
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    if (!data.success && data.error === 'Invalid password') {
+      showToast('Session expired. Please login again.', 'error');
+      setTimeout(function(){ doLogout(); }, 2000);
+      return;
+    }
+    callback(null, data);
+  })
+  .catch(function(err){ callback(err, null); });
 }
 
 // ── LOAD FARMS ────────────────────────────────────────────
 function loadFarms() {
   apiCall({ action: 'get_products' }, function(err, data) {
     if (err || !data.success) {
-      document.getElementById('farm-selector-wrap').innerHTML = '<p style="color:var(--red);font-size:13px;font-weight:700;">⚠️ Farms load nahi hue. GAS URL check karein.</p>';
+      document.getElementById('farm-selector-wrap').innerHTML =
+        '<p style="color:var(--red);font-size:13px;font-weight:700;">⚠️ Could not load farms. Check your GAS URL and Shopify token.<br><small>' + (err || data.error) + '</small></p>';
       return;
     }
     products = data.products;
-    var html = '<select class="farm-select" id="farm-select" onchange="onFarmChange(this.value)">';
-    html += '<option value="">— Farmhouse select karein —</option>';
-    products.forEach(function(p){ html += '<option value="' + p.id + '">' + escHtml(p.title) + '</option>'; });
-    html += '</select>';
-    document.getElementById('farm-selector-wrap').innerHTML = html;
+    renderFarmSelect();
     document.getElementById('top-bar-subtitle').textContent = products.length + ' farms loaded';
   });
 }
 
+function renderFarmSelect() {
+  var html = '<select class="farm-select" id="farm-select" onchange="onFarmChange(this.value)">';
+  html += '<option value="">— Select a Farmhouse —</option>';
+  products.forEach(function(p) {
+    html += '<option value="' + p.id + '">' + escHtml(p.title) + '</option>';
+  });
+  html += '</select>';
+  document.getElementById('farm-selector-wrap').innerHTML = html;
+}
+
 function onFarmChange(productId) {
-  if (!productId) { document.getElementById('booked-dates-wrap').style.display='none'; document.getElementById('cal-card').style.display='none'; return; }
+  if (!productId) {
+    document.getElementById('booked-dates-wrap').style.display = 'none';
+    document.getElementById('cal-card').style.display = 'none';
+    return;
+  }
   selectedProduct = products.find(function(p){ return String(p.id) === String(productId); });
   toAdd = []; toRemove = [];
   loadBookedDates(productId);
 }
 
+// ── LOAD BOOKED DATES ─────────────────────────────────────
 function loadBookedDates(productId) {
-  document.getElementById('booked-dates-wrap').style.display = 'block';
-  document.getElementById('booked-chips').innerHTML = '<div class="loader"><div class="spinner"></div>Loading...</div>';
+  document.getElementById('booked-dates-wrap').style.display = 'none';
   document.getElementById('cal-card').style.display = 'none';
 
+  var wrap = document.getElementById('booked-dates-wrap');
+  wrap.style.display = 'block';
+  document.getElementById('booked-chips').innerHTML = '<div class="loader"><div class="spinner"></div>Loading dates...</div>';
+
   apiCall({ action: 'get_booked_dates', product_id: productId }, function(err, data) {
-    if (err || !data.success) { showToast('Dates load nahi hue: ' + (err || data.error), 'error'); return; }
+    if (err || !data.success) {
+      showToast('Could not load dates: ' + (err || data.error), 'error');
+      return;
+    }
     currentDates = data.dates || [];
     renderBookedChips();
+
+    // Init calendar
     var now = new Date();
-    calYear = now.getFullYear(); calMonth = now.getMonth();
+    calYear  = now.getFullYear();
+    calMonth = now.getMonth();
     document.getElementById('cal-card').style.display = 'block';
     renderCalendar();
   });
@@ -366,203 +439,203 @@ function loadBookedDates(productId) {
 
 function renderBookedChips() {
   var chips = document.getElementById('booked-chips');
-  if (currentDates.length === 0) { chips.innerHTML = '<span class="no-dates">Abhi koi date booked nahi</span>'; return; }
+  if (currentDates.length === 0) {
+    chips.innerHTML = '<span class="no-dates">No dates booked yet</span>';
+    return;
+  }
   chips.innerHTML = currentDates.map(function(d) {
-    var mr = toRemove.indexOf(d) !== -1;
-    return '<span class="booked-chip' + (mr?' marked-remove':'') + '">' + fmtDate(d)
-      + '<button class="chip-remove-btn" onclick="toggleRemoveDate(\'' + d + '\')" title="Remove">×</button></span>';
+    var markedRemove = toRemove.indexOf(d) !== -1;
+    return '<span class="booked-chip' + (markedRemove ? ' marked-remove' : '') + '">'
+      + fmtDate(d)
+      + '<button class="chip-remove-btn" onclick="toggleRemoveDate(\'' + d + '\')" title="Remove this date">×</button>'
+      + '</span>';
   }).join('');
 }
 
 // ── CALENDAR ──────────────────────────────────────────────
 function calNav(delta) {
   calMonth += delta;
-  if (calMonth < 0){ calMonth=11; calYear--; }
-  if (calMonth > 11){ calMonth=0; calYear++; }
+  if (calMonth < 0) { calMonth = 11; calYear--; }
+  if (calMonth > 11){ calMonth = 0;  calYear++; }
   renderCalendar();
 }
 
 function renderCalendar() {
   document.getElementById('cal-month-label').textContent = MONTHS[calMonth] + ' ' + calYear;
+
+  // DOW headers
   var dow = document.getElementById('cal-dow');
   dow.innerHTML = DOWS.map(function(d){ return '<div class="cal-dow">' + d + '</div>'; }).join('');
+
   var grid = document.getElementById('cal-grid');
   grid.innerHTML = '';
-  var firstDay = new Date(calYear, calMonth, 1);
-  var startDow = (firstDay.getDay() + 6) % 7;
-  var daysInMo = new Date(calYear, calMonth + 1, 0).getDate();
-  for (var e = 0; e < startDow; e++) { var emp=document.createElement('div'); emp.className='cal-day empty'; grid.appendChild(emp); }
+
+  var firstDay  = new Date(calYear, calMonth, 1);
+  var startDow  = (firstDay.getDay() + 6) % 7;
+  var daysInMo  = new Date(calYear, calMonth + 1, 0).getDate();
+
+  for (var e = 0; e < startDow; e++) {
+    var emp = document.createElement('div');
+    emp.className = 'cal-day empty';
+    grid.appendChild(emp);
+  }
+
   for (var day = 1; day <= daysInMo; day++) {
-    var d = new Date(calYear, calMonth, day);
-    var iso = isoDate(d);
+    var d    = new Date(calYear, calMonth, day);
+    var iso  = isoDate(d);
     var isPast = d < today;
+
     var cls = 'cal-day';
-    if (isPast) cls += ' past';
-    else if (toAdd.indexOf(iso) !== -1) cls += ' to-add';
-    else if (toRemove.indexOf(iso) !== -1) cls += ' to-remove';
-    else if (currentDates.indexOf(iso) !== -1) cls += ' already-booked';
+    if (isPast) {
+      cls += ' past';
+    } else if (toAdd.indexOf(iso) !== -1) {
+      cls += ' to-add';
+    } else if (toRemove.indexOf(iso) !== -1) {
+      cls += ' to-remove';
+    } else if (currentDates.indexOf(iso) !== -1) {
+      cls += ' already-booked';
+    }
+
     var el = document.createElement('div');
-    el.className = cls; el.textContent = day;
-    if (!isPast) { (function(isoVal){ el.addEventListener('click', function(){ onCalDayClick(isoVal); }); })(iso); }
+    el.className = cls;
+    el.textContent = day;
+    if (!isPast) {
+      (function(isoVal){ el.addEventListener('click', function(){ onCalDayClick(isoVal); }); })(iso);
+    }
     grid.appendChild(el);
   }
+
   updatePendingUI();
 }
 
 function onCalDayClick(iso) {
   var inCurrent = currentDates.indexOf(iso) !== -1;
-  var inAdd = toAdd.indexOf(iso) !== -1;
-  var inRemove = toRemove.indexOf(iso) !== -1;
-  if (inCurrent) { if (inRemove) toRemove.splice(toRemove.indexOf(iso),1); else toRemove.push(iso); }
-  else { if (inAdd) toAdd.splice(toAdd.indexOf(iso),1); else toAdd.push(iso); }
-  renderCalendar(); renderBookedChips();
+  var inAdd     = toAdd.indexOf(iso) !== -1;
+  var inRemove  = toRemove.indexOf(iso) !== -1;
+
+  if (inCurrent) {
+    // Toggle remove
+    if (inRemove) {
+      toRemove.splice(toRemove.indexOf(iso), 1);
+    } else {
+      toRemove.push(iso);
+    }
+  } else {
+    // Toggle add
+    if (inAdd) {
+      toAdd.splice(toAdd.indexOf(iso), 1);
+    } else {
+      toAdd.push(iso);
+    }
+  }
+
+  renderCalendar();
+  renderBookedChips();
 }
 
 function toggleRemoveDate(iso) {
   var idx = toRemove.indexOf(iso);
-  if (idx !== -1) toRemove.splice(idx,1); else toRemove.push(iso);
-  renderCalendar(); renderBookedChips();
+  if (idx !== -1) {
+    toRemove.splice(idx, 1);
+  } else {
+    toRemove.push(iso);
+  }
+  renderCalendar();
+  renderBookedChips();
 }
 
 function updatePendingUI() {
-  var hasChanges = toAdd.length > 0 || toRemove.length > 0;
-  document.getElementById('pending-wrap').style.display = hasChanges ? 'block' : 'none';
-  document.getElementById('save-btn').disabled = !hasChanges;
-  var addRow = document.getElementById('pending-add-row');
+  var pendingWrap = document.getElementById('pending-wrap');
+  var saveBtn     = document.getElementById('save-btn');
+  var hasChanges  = toAdd.length > 0 || toRemove.length > 0;
+
+  pendingWrap.style.display = hasChanges ? 'block' : 'none';
+  saveBtn.disabled = !hasChanges;
+
+  var addRow    = document.getElementById('pending-add-row');
   var removeRow = document.getElementById('pending-remove-row');
-  if (toAdd.length > 0) { addRow.style.display='flex'; document.getElementById('pending-add-dates').textContent=toAdd.map(fmtDate).join(', '); } else addRow.style.display='none';
-  if (toRemove.length > 0) { removeRow.style.display='flex'; document.getElementById('pending-remove-dates').textContent=toRemove.map(fmtDate).join(', '); } else removeRow.style.display='none';
-}
 
-function resetChanges(){ toAdd=[]; toRemove=[]; renderCalendar(); renderBookedChips(); }
-
-function saveChanges() {
-  if (!selectedProduct || (!toAdd.length && !toRemove.length)) return;
-  var btn = document.getElementById('save-btn');
-  btn.disabled = true; btn.innerHTML = '<div class="spinner" style="border-top-color:#fff;"></div> Saving...';
-  apiCall({ action:'update_dates', product_id:selectedProduct.id, dates_to_add:toAdd.join(','), dates_to_remove:toRemove.join(',') }, function(err, data) {
-    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg> Website pe Save Karein';
-    if (err || !data.success) { showToast('Error: ' + (err || data.error), 'error'); btn.disabled=false; return; }
-    currentDates = data.dates || []; toAdd=[]; toRemove=[];
-    renderCalendar(); renderBookedChips();
-    showToast('✓ Dates website pe update ho gayi!', 'success');
-  });
-}
-
-// ── REVIEWS TAB ───────────────────────────────────────────
-function loadReviewsForApproval() {
-  var list = document.getElementById('reviews-list');
-  list.innerHTML = '<div class="loader"><div class="spinner"></div>Reviews load ho rahe hain...</div>';
-
-  // All products ke reviews fetch karo
-  var allReviews = [];
-  var pending = products.length;
-  if (pending === 0) { list.innerHTML = '<div class="empty-state"><div class="emoji">📋</div><p>Pehle farms load karein.</p></div>'; return; }
-
-  products.forEach(function(p) {
-    fetch(GAS_URL + '?action=get_reviews&product_id=' + p.id + '&include_pending=true&password=' + encodeURIComponent(authToken))
-      .then(function(r){ return r.json(); })
-      .then(function(d) {
-        if (d.success && d.reviews_raw) {
-          d.reviews_raw.forEach(function(r){ r._product = p; allReviews.push(r); });
-        }
-        pending--;
-        if (pending === 0) renderReviews(allReviews, list);
-      })
-      .catch(function(){ pending--; if(pending===0) renderReviews(allReviews, list); });
-  });
-}
-
-function renderReviews(reviews, container) {
-  var pending = reviews.filter(function(r){ return r.status === 'Pending'; });
-  var approved = reviews.filter(function(r){ return r.status === 'Approved'; });
-  var all = pending.concat(approved);
-
-  // Badge update
-  var badge = document.getElementById('pending-review-badge');
-  if (pending.length > 0) { badge.style.display='inline-flex'; badge.textContent=pending.length; }
-  else badge.style.display='none';
-
-  if (all.length === 0) {
-    container.innerHTML = '<div class="empty-state"><div class="emoji">⭐</div><p>Abhi koi review nahi aaya.</p></div>';
-    return;
+  if (toAdd.length > 0) {
+    addRow.style.display = 'flex';
+    document.getElementById('pending-add-dates').textContent = toAdd.map(fmtDate).join(', ');
+  } else {
+    addRow.style.display = 'none';
   }
 
-  container.innerHTML = all.map(function(r, idx) {
-    var stars = '⭐'.repeat(r.rating || 5);
-    var statusCls = r.status === 'Approved' ? 'status-approved' : r.status === 'Rejected' ? 'status-rejected' : 'status-pending';
-    return '<div class="review-card" id="rev-card-' + idx + '">'
-      + '<div class="review-card-header">'
-      + '<div>'
-      + '<div class="review-farm">' + escHtml(r.farm_name || '') + '</div>'
-      + '<div style="font-weight:800;font-size:14px;">' + escHtml(r.reviewer_name || 'Anonymous') + '</div>'
-      + '<div class="review-meta">' + fmtDateStr(r.date) + '</div>'
-      + '</div>'
-      + '<div style="text-align:right;">'
-      + '<div class="review-stars">' + stars + '</div>'
-      + '<span class="status-badge ' + statusCls + '">' + (r.status || 'Pending') + '</span>'
-      + '</div>'
-      + '</div>'
-      + '<p class="review-text">' + escHtml(r.review_text || '') + '</p>'
-      + (r.status === 'Pending' ? '<div class="review-actions">'
-        + '<button class="btn-approve" onclick="approveReview(\'' + r.row_id + '\', ' + idx + ', \'Approved\')">✓ Approve</button>'
-        + '<button class="btn-reject" onclick="approveReview(\'' + r.row_id + '\', ' + idx + ', \'Rejected\')">✗ Reject</button>'
-        + '</div>' : '')
-      + '</div>';
-  }).join('');
+  if (toRemove.length > 0) {
+    removeRow.style.display = 'flex';
+    document.getElementById('pending-remove-dates').textContent = toRemove.map(fmtDate).join(', ');
+  } else {
+    removeRow.style.display = 'none';
+  }
 }
 
-function approveReview(rowId, idx, status) {
-  var btn = document.getElementById('rev-card-' + idx).querySelector('.btn-approve') || document.getElementById('rev-card-' + idx);
-  apiCall({ action: 'update_review_status', row_id: rowId, status: status }, function(err, data) {
-    if (err || !data.success) { showToast('Error: ' + (err||data.error), 'error'); return; }
-    showToast(status === 'Approved' ? '✓ Review approved!' : 'Review rejected.', status === 'Approved' ? 'success' : '');
-    loadReviewsForApproval();
-  });
+function resetChanges() {
+  toAdd = []; toRemove = [];
+  renderCalendar();
+  renderBookedChips();
 }
 
-// ── BOOKINGS TAB ──────────────────────────────────────────
-function loadBookingsLog() {
-  var list = document.getElementById('bookings-list');
-  list.innerHTML = '<div class="loader"><div class="spinner"></div>Bookings load ho rahe hain...</div>';
+// ── SAVE ─────────────────────────────────────────────────
+function saveChanges() {
+  if (!selectedProduct) return;
+  if (toAdd.length === 0 && toRemove.length === 0) return;
 
-  apiCall({ action: 'get_bookings' }, function(err, data) {
-    if (err || !data.success || !data.bookings || data.bookings.length === 0) {
-      list.innerHTML = '<div class="empty-state"><div class="emoji">📋</div><p>Abhi koi booking nahi.</p></div>';
+  var btn = document.getElementById('save-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner" style="border-top-color:#fff;"></div> Saving...';
+
+  apiCall({
+    action:          'update_dates',
+    product_id:      selectedProduct.id,
+    dates_to_add:    toAdd.join(','),
+    dates_to_remove: toRemove.join(',')
+  }, function(err, data) {
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg> Save to Website';
+
+    if (err || !data.success) {
+      showToast('Error: ' + (err || data.error), 'error');
+      btn.disabled = false;
       return;
     }
-    list.innerHTML = data.bookings.map(function(b, i) {
-      var reviewSent = b.review_sent === 'Yes';
-      return '<div class="booking-row">'
-        + '<div class="booking-info">'
-        + '<div class="booking-name">' + escHtml(b.guest_name) + ' &nbsp;<span style="font-size:12px;color:var(--muted);">#' + escHtml(b.booking_id) + '</span></div>'
-        + '<div class="booking-detail">🏠 ' + escHtml(b.farm_name) + ' &nbsp;|&nbsp; 📅 ' + escHtml(b.checkin) + ' → ' + escHtml(b.checkout) + ' &nbsp;|&nbsp; 👥 ' + escHtml(String(b.guests)) + ' guests</div>'
-        + '</div>'
-        + '<div class="booking-price">₹' + escHtml(String(b.total_price)) + '</div>'
-        + '<button class="btn-send-review" ' + (reviewSent ? 'disabled' : '') + ' onclick="sendReviewManual(\'' + escHtml(b.booking_id) + '\', this)">'
-        + (reviewSent ? '✓ Sent' : '📧 Review bhejo')
-        + '</button>'
-        + '</div>';
-    }).join('');
-  });
-}
 
-function sendReviewManual(bookingId, btn) {
-  btn.disabled = true; btn.textContent = 'Sending...';
-  apiCall({ action: 'send_review_request', booking_id: bookingId }, function(err, data) {
-    if (err || !data.success) { showToast('Error: ' + (err||data.error), 'error'); btn.disabled=false; btn.textContent='📧 Review bhejo'; return; }
-    btn.textContent = '✓ Sent';
-    showToast('✓ Review email bheja gaya!', 'success');
+    // Update local state
+    currentDates = data.dates || [];
+    toAdd = []; toRemove = [];
+
+    renderCalendar();
+    renderBookedChips();
+
+    showToast('✓ Dates updated successfully on Website!', 'success');
   });
 }
 
 // ── HELPERS ──────────────────────────────────────────────
-function isoDate(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
-function fmtDate(iso){ var p=iso.split('-'); var d=new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2])); return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()]+' '+d.getDate()+', '+d.getFullYear(); }
-function fmtDateStr(str){ if(!str) return ''; try{ return new Date(str).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}); }catch(e){return str;} }
-function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-var toastTimer=null;
-function showToast(msg,type){ var t=document.getElementById('toast'); t.textContent=msg; t.className='toast show '+(type||''); if(toastTimer) clearTimeout(toastTimer); toastTimer=setTimeout(function(){t.className='toast';},3500); }
+function isoDate(d) {
+  return d.getFullYear() + '-'
+    + String(d.getMonth() + 1).padStart(2, '0') + '-'
+    + String(d.getDate()).padStart(2, '0');
+}
+
+function fmtDate(iso) {
+  var p = iso.split('-');
+  var d = new Date(parseInt(p[0]), parseInt(p[1]) - 1, parseInt(p[2]));
+  return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()]
+    + ' ' + d.getDate() + ', ' + d.getFullYear();
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+var toastTimer = null;
+function showToast(msg, type) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + (type || '');
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ t.className = 'toast'; }, 3500);
+}
 </script>
 </body>
 </html>
